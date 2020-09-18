@@ -18,4 +18,13 @@ Import the .sql file in your database. Drag and drop the resource in your ESX fo
 
 **CONFIGURATION**
 
-You can configure prices in the ```config.lua``` file. Markers and locations can also be changed in the ```config.lua``` file.
+`Config.WeedItem = "weed"` -> the item name of weed in your server, mostly just 'weed'.
+
+`Config.WeedPrice = 3` -> price per weed, equals to amount player has times 3.
+
+`Config.JointPrice = 20` -> price for one joint.
+
+`Config.JobName = "weedshop"` -> don't change this unless you already have a job set up in your server.
+
+`Config.ShopName = "Coffeeshop The Bulldog"` -> name of the shop, used as blipname.
+
