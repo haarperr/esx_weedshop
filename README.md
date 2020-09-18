@@ -10,7 +10,7 @@ Discord for support: Arne#7777
 
 **HOW IT WORKS**
 
-'Job' works through a storage system. Players can sell their weed at the coffeeshop for some quick cash, this weed wil eventually be added into the storage of the shop. With weed, you're able to roll joints as a shop employee. Joints get selled at the register, which also has an amount of cash money inside it. 
+'Job' works through a storage system. Players can sell their weed at the coffeeshop for some quick cash, this weed will eventually be added into the storage of the shop. With weed, you're able to roll joints as a shop employee. Joints get selled at the register, which also has an amount of cash money inside it. 
 
 **INSTALLATION**
 
