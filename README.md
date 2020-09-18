@@ -5,6 +5,7 @@ Discord for support: Arne#7777
 **DEPENDENCIES**
 
 - es_extended
+- progressBars
 - MLO used in this resource: https://www.gta5-mods.com/maps/mlo-legion-weed-clinic
 
 **HOW IT WORKS**
