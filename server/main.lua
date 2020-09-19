@@ -78,21 +78,39 @@ RegisterNetEvent('esx_weedshop:server:buyJoint')
 AddEventHandler('esx_weedshop:server:buyJoint', function(price)
     local sourcePlayer = ESX.GetPlayerFromId(source)
 
-    if sourcePlayer.canCarryItem('joint', 1) then
-        sourcePlayer.addInventoryItem('joint', 1)
-        sourcePlayer.removeMoney(price)
+    if Config.usingWeight then
+        if sourcePlayer.canCarryItem('joint', 1) then
+            sourcePlayer.addInventoryItem('joint', 1)
+            sourcePlayer.removeMoney(price)
 
-        -- DELETE ONE JOINT FROM STORAGE
-        MySQL.Async.fetchAll('SELECT * FROM weedshop WHERE type = @type', { ['@type'] = 'joint' }, function(result)
-            MySQL.Async.execute('UPDATE weedshop SET amount = @amount WHERE type = @type', { ['@amount'] = result[1].amount - 1, ['@type'] = 'joint' })
-        end)
+            -- DELETE ONE JOINT FROM STORAGE
+            MySQL.Async.fetchAll('SELECT * FROM weedshop WHERE type = @type', { ['@type'] = 'joint' }, function(result)
+                MySQL.Async.execute('UPDATE weedshop SET amount = @amount WHERE type = @type', { ['@amount'] = result[1].amount - 1, ['@type'] = 'joint' })
+            end)
 
-        -- ADD $20 TO REGISTER
-        MySQL.Async.fetchAll('SELECT * FROM weedshop WHERE type = @type', { ['@type'] = 'register' }, function(result)
-            MySQL.Async.execute('UPDATE weedshop SET amount = @amount WHERE type = @type', { ['@amount'] = result[1].amount + 20, ['@type'] = 'register' })
-        end)
+            -- ADD $20 TO REGISTER
+            MySQL.Async.fetchAll('SELECT * FROM weedshop WHERE type = @type', { ['@type'] = 'register' }, function(result)
+                MySQL.Async.execute('UPDATE weedshop SET amount = @amount WHERE type = @type', { ['@amount'] = result[1].amount + 20, ['@type'] = 'register' })
+            end)
+        else
+            sourcePlayer.showNotification("You can't carry this item...")
+        end
     else
-        sourcePlayer.showNotification("You can't carry this item...")
+        local sourceItem = xPlayer.getInventoryItem('joint')
+        if sourceItem.limit ~= -1 and (sourceItem.count + 1) > sourceItem.limit then
+            sourcePlayer.showNotification("You can't carry any more joints...")
+        else
+            sourcePlayer.addInventoryItem('joint', amount)
+                -- DELETE ONE JOINT FROM STORAGE
+            MySQL.Async.fetchAll('SELECT * FROM weedshop WHERE type = @type', { ['@type'] = 'joint' }, function(result)
+                MySQL.Async.execute('UPDATE weedshop SET amount = @amount WHERE type = @type', { ['@amount'] = result[1].amount - 1, ['@type'] = 'joint' })
+            end)
+
+            -- ADD $20 TO REGISTER
+            MySQL.Async.fetchAll('SELECT * FROM weedshop WHERE type = @type', { ['@type'] = 'register' }, function(result)
+                MySQL.Async.execute('UPDATE weedshop SET amount = @amount WHERE type = @type', { ['@amount'] = result[1].amount + 20, ['@type'] = 'register' })
+            end)
+        end        
     end
 end)
 
