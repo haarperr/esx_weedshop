@@ -5,6 +5,7 @@
 
 Config = {}
 
+Config.usingWeight = true
 Config.WeedItem = "weed"
 Config.WeedPrice = 3
 Config.JointPrice = 20
