@@ -96,7 +96,7 @@ AddEventHandler('esx_weedshop:server:buyJoint', function(price)
             sourcePlayer.showNotification("You can't carry this item...")
         end
     else
-        local sourceItem = xPlayer.getInventoryItem('joint')
+        local sourceItem = sourcePlayer.getInventoryItem('joint')
         if sourceItem.limit ~= -1 and (sourceItem.count + 1) > sourceItem.limit then
             sourcePlayer.showNotification("You can't carry any more joints...")
         else
